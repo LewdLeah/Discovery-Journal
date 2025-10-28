@@ -395,7 +395,7 @@ globalThis.MainSettings = (class MainSettings {
         // ("text")
         ,
         // Should titles mentioned in the "opening" plot component be banned from future card generation by default?
-        DEFAULT_BAN_TITLES_FROM_OPENING: false
+        DEFAULT_BAN_TITLES_FROM_OPENING: true
         // (true or false)
     };
 
