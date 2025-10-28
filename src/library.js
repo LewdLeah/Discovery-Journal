@@ -99,9 +99,9 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
             }
         }
     } else if (Array.isArray(globalThis.storyCards)) {
-        const region = (() => {
+        const [region, encounters] = (() => {
             if (typeof globalThis.text !== "string") {
-                return "";
+                return ["", 0];
             }
             const lower = globalThis.text.toLowerCase();
             const startMarker = "world lore:";
@@ -109,7 +109,7 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
             const start = (startIndex === -1) ? 0 : startIndex + startMarker.length;
             const endIndex = lower.lastIndexOf("recent story:");
             const end = (endIndex === -1) ? globalThis.text.length : endIndex;
-            return (start < end) ? globalThis.text.slice(start, end) : globalThis.text;
+            return [(start < end) ? globalThis.text.slice(start, end) : globalThis.text, start || []];
         })();
         const seen = new Set();
         const copy = new Map();
@@ -139,6 +139,14 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
             seen.add(name);
             const stage = getStage(card);
             const score = scores[name];
+            if (
+                Array.isArray(encounters)
+                && (0 < score[0])
+                && (card.type === "character")
+                && (2 < name.length)
+            ) {
+                encounters.push([name, score[0]]);
+            }
             score[0] = Math.min(Math.max(0, stage, score[0]) + (() => {
                 if (!incremental) {
                     return 0;
@@ -216,6 +224,7 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
             }
         }
         globalThis.state.DiscoveryJournal.last = turn;
+        log(text);
     }
 }
 
