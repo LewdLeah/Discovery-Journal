@@ -137,22 +137,21 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
                 scores[name] = [0, 0, 999];
             }
             seen.add(name);
-            const stage = getStage(card);
             const score = scores[name];
             if (
                 Array.isArray(encounters)
                 && (0 < score[0])
-                && (card.type === "character")
                 && (2 < name.length)
             ) {
                 encounters.push([name, score[0]]);
             }
+            const stage = getStage(card);
             score[0] = Math.min(Math.max(0, stage, score[0]) + (() => {
                 if (!incremental) {
                     return 0;
                 } else if (!region.includes(indicator) && (0 < score[1])) {
                     score[1]--;
-                } else if (score[1] < (((card.type === "character") && (5 < score[0])) ? 5 : 2)) {
+                } else if (score[1] < (((card.type === "character") && (5 < score[0])) ? 6 : 3)) {
                     score[1]++;
                 } else {
                     score[1] = 0;
@@ -164,6 +163,16 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
                 setStage(card, score[0]);
             }
             card.score = score[0];
+        }
+        if (Array.isArray(encounters) && (0 < encounters.length)) {
+            globalThis.text = (
+                `<goal>\n## Attempt to narratively reintroduce one of the following (previous, known) entites by name:${["", ...encounters
+                    .sort((a, b) => (b[1] - a[1]))
+                    .slice(0, 5)
+                    .map(encounter => encounter[0])
+                    .sort(() => (Math.random() - 0.5))
+                ].join("\n- ")}\n</goal>\n\n${globalThis.text.trimStart()}`
+            );
         }
         for (const name in scores) {
             if (seen.has(name)) {
@@ -224,7 +233,7 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
             }
         }
         globalThis.state.DiscoveryJournal.last = turn;
-        log(text);
+        //log(text); //>del
     }
 }
 
