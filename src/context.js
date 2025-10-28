@@ -4,6 +4,6 @@ const modifier = (text) => {
   [text, stop] = AutoCards("context", text, stop);
   text = LocalizedLanguages("context", text);
   // Your other context modifier scripts go here (risky)
-  return { text, stop }; //>add
+  return { text, stop };
 };
 modifier(text);
