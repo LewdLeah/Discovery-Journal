@@ -101,7 +101,7 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
     } else if (Array.isArray(globalThis.storyCards)) {
         const [region, encounters] = (() => {
             if (typeof globalThis.text !== "string") {
-                return ["", 0];
+                return ["", null];
             }
             const lower = globalThis.text.toLowerCase();
             const startMarker = "world lore:";
@@ -165,13 +165,22 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
             card.score = score[0];
         }
         if (Array.isArray(encounters) && (0 < encounters.length)) {
-            globalThis.text = (
-                `<goal>\n## Attempt to narratively reintroduce one of the following (previous, known) entites by name:${["", ...encounters
-                    .sort((a, b) => (b[1] - a[1]))
-                    .slice(0, 5)
-                    .map(encounter => encounter[0])
+            encounters.sort((a, b) => (b[1] - a[1]));
+            const task = `<TASK>\n## Narratively mention one of the following previously encountered named entities:${
+                ["", ...(((10 < encounters.length) ? encounters.slice(5, 10) : encounters.slice(0, 5))
+                    .map(e => e[0])
                     .sort(() => (Math.random() - 0.5))
-                ].join("\n- ")}\n</goal>\n\n${globalThis.text.trimStart()}`
+                )].join("\n- ")
+            }\n</TASK>\n`;
+            const lower = globalThis.text.toLowerCase();
+            let index = lower.lastIndexOf("[author's note:");
+            if (index === -1) {
+                index = lower.lastIndexOf("recent story:");
+            }
+            globalThis.text = (
+                (index === -1)
+                ? `${task}${globalThis.text.trimStart()}`
+                : globalThis.text.slice(0, index) + task + globalThis.text.slice(index)
             );
         }
         for (const name in scores) {
@@ -233,7 +242,6 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
             }
         }
         globalThis.state.DiscoveryJournal.last = turn;
-        //log(text); //>del
     }
 }
 
