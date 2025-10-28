@@ -1,5 +1,6 @@
 Library:
 - [Library code](./src/library.js)
+
 Input:
 ```javascript
 // Your "Input" tab should look like this
