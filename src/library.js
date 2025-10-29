@@ -109,7 +109,11 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
             const start = (startIndex === -1) ? 0 : startIndex + startMarker.length;
             const endIndex = lower.lastIndexOf("recent story:");
             const end = (endIndex === -1) ? globalThis.text.length : endIndex;
-            return [(start < end) ? globalThis.text.slice(start, end) : globalThis.text, start || []];
+            return [(start < end) ? globalThis.text.slice(start, end) : globalThis.text, start || ((
+                Number.isInteger(globalThis.info?.actionCount)
+                && (globalThis.info.actionCount < 500)
+                && (Math.random() < ((globalThis.info.actionCount < 250) ? 0.4 : 0.2))
+            ) ? [] : null)];
         })();
         const seen = new Set();
         const copy = new Map();
@@ -173,7 +177,7 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
                 )].join("\n- ")
             }\n</TASK>\n`;
             const lower = globalThis.text.toLowerCase();
-            let index = lower.lastIndexOf("[author's note:");
+            let index = (Math.random() < 0.3) ? lower.lastIndexOf("[author's note:") : -1;
             if (index === -1) {
                 index = lower.lastIndexOf("recent story:");
             }
@@ -300,7 +304,7 @@ globalThis.MainSettings = (class MainSettings {
         // (true or false)
         ,
         // Minimum number of turns in between automatic card generation events?
-        DEFAULT_CARD_CREATION_COOLDOWN: 75
+        DEFAULT_CARD_CREATION_COOLDOWN: 85
         // (0 to 9999)
         ,
         // Use a bulleted list format for newly generated card entries?
