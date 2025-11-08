@@ -111,8 +111,14 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
             const end = (endIndex === -1) ? globalThis.text.length : endIndex;
             return [(start < end) ? globalThis.text.slice(start, end) : globalThis.text, start || ((
                 Number.isInteger(globalThis.info?.actionCount)
-                && (globalThis.info.actionCount < 500)
-                && (Math.random() < ((globalThis.info.actionCount < 250) ? 0.4 : 0.2))
+                && (globalThis.info.actionCount < 1000)
+                && (Math.random() < (
+                    (globalThis.info.actionCount < 250)
+                    ? 0.4
+                    : (globalThis.info.actionCount < 500)
+                    ? 0.2
+                    : 0.1
+                ))
             ) ? [] : null)];
         })();
         const seen = new Set();
