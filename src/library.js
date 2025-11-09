@@ -123,6 +123,11 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
             Number.isInteger(globalThis.info?.actionCount) ? Math.max(0, globalThis.info.actionCount) : 0
         );
         const scores = globalThis.state.DiscoveryJournal.scores;
+        for (const name in scores) {
+            if (scores[name] === 0) {
+                scores[name] = [0, 0, 999];
+            }
+        }
         const incremental = ((globalThis.state.DiscoveryJournal.last < turn) || (turn === 0));
         for (let i = globalThis.storyCards.length - 1; 0 <= i; i--) {
             const card = globalThis.storyCards[i];
@@ -155,8 +160,10 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
             score[0] = Math.min(Math.max(0, stage, score[0]) + (() => {
                 if (!incremental) {
                     return 0;
-                } else if (!region.includes(indicator) && (0 < score[1])) {
-                    score[1]--;
+                } else if (!region.includes(indicator)) {
+                    if (0 < score[1]) {
+                        score[1]--;
+                    }
                 } else if (score[1] < (((card.type === "character") && (5 < score[0])) ? 6 : 3)) {
                     score[1]++;
                 } else {
@@ -191,14 +198,18 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
         }
         for (const name in scores) {
             if (seen.has(name)) {
-                scores[name][2] = 999;
+                if ((scores[name][0] === 0) && (scores[name][1] === 0)) {
+                    scores[name] = 0;
+                } else {
+                    scores[name][2] = 999;
+                }
             } else if (scores[name][2] < 1) {
                 delete scores[name];
             } else {
                 scores[name][2]--;
             }
         }
-        if (20000 < JSON.stringify(scores).length) {
+        if (24000 < JSON.stringify(scores).length) {
             for (const name in scores) {
                 delete scores[name];
             }
