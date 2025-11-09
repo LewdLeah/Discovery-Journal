@@ -1,7 +1,7 @@
 // Your "Library" tab should look like this
 
 /*
-Discovery Journal v0.0.1
+Discovery Journal v0.0.3
 Made by LewdLeah on October 28, 2025
 */
 if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJournal?.scores) {
