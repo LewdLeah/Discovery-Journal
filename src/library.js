@@ -113,11 +113,7 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
                 Number.isInteger(globalThis.info?.actionCount)
                 && (globalThis.info.actionCount < 1000)
                 && (Math.random() < (
-                    (globalThis.info.actionCount < 250)
-                    ? 0.4
-                    : (globalThis.info.actionCount < 500)
-                    ? 0.2
-                    : 0.1
+                    (globalThis.info.actionCount < 250) ? 0.4 : (globalThis.info.actionCount < 500) ? 0.2 : 0.1
                 ))
             ) ? [] : null)];
         })();
