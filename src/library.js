@@ -199,7 +199,9 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
             }
         }
         if (20000 < JSON.stringify(scores).length) {
-            scores = {};
+            for (const name in scores) {
+                delete scores[name];
+            }
         }
         globalThis.storyCards.sort((cardA, cardB) => {
             const scoreDiff = (
