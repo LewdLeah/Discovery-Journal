@@ -49,7 +49,7 @@ if ((globalThis.info?.maxChars !== undefined) || !globalThis.state?.DiscoveryJou
     if (!globalThis.state?.DiscoveryJournal?.scores) {
         globalThis.state ??= {};
         globalThis.state.DiscoveryJournal = {
-            refresh: undefined,
+            refresh: Date.now() - 555000,
             scores: {},
             last: 0
         };
