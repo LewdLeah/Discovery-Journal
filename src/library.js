@@ -335,7 +335,7 @@ globalThis.MainSettings = (class MainSettings {
         // (true or false)
         ,
         // Default character limit before the card's memory bank is summarized?
-        DEFAULT_NEW_CARDS_MEMORY_LIMIT: 2750
+        DEFAULT_NEW_CARDS_MEMORY_LIMIT: 3200
         // (1750 to 9900)
         ,
         // Approximately how much shorter should recently compressed memories be? (ratio = 10 * old / new)
@@ -24222,7 +24222,7 @@ function AutoCards(inHook, inText, inStop) {
     // (true or false)
     ,
     // Default character limit before the card's memory bank is summarized?
-    DEFAULT_NEW_CARDS_MEMORY_LIMIT: 2750
+    DEFAULT_NEW_CARDS_MEMORY_LIMIT: 3200
     // (1750 to 9900)
     ,
     // Approximately how much shorter should recently compressed memories be? (ratio = 10 * old / new)
