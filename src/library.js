@@ -278,7 +278,7 @@ globalThis.MainSettings = (class MainSettings {
 
     /*
     Localized Languages (LoLa) v1.0.2
-    Made by LewdLeah on August 13, 2025
+    Made by Lewd on August 13, 2025
     This script allows players to enjoy AI Dungeon adventures in their preferred languages
     English-speaking scenario creators may appreciate the improved audience reach
     Non-English scenario creators are especially encouraged to write anything they desire
@@ -304,7 +304,7 @@ globalThis.MainSettings = (class MainSettings {
 
     /*
     AC
-    Made by LewdLeah on May 21, 2025
+    Made by Lewd on May 21, 2025
     This AI Dungeon script automatically creates and updates plot-relevant story cards while you play
     General-purpose usefulness and compatibility with other scenarios/scripts were my design priorities
     AC is fully open-source, please copy for use within your own projects! ❤️
@@ -25488,41 +25488,41 @@ function AutoCards(inHook, inText, inStop) {
                     "    text = formatMessage(\"You encounter a dragon!\");",
                     "    log(\"A dragon appears!\");",
                     "}],",
-                    "[\"summon leah\", () => {",
+                    "[\"summon lewdleah\", () => {",
                     "    alterMind();",
                     "    const success = AutoCards().API.generateCard({",
-                    "        title: \"Leah\",",
+                    "        title: \"LewdLeah\",",
                     "        entryPromptDetails: (",
-                    "            \"Leah is an exceptionally \" +",
+                    "            \"LewdLeah is an exceptionally \" +",
                     "            minds[state.mind] +",
                     "            \" woman\"",
                     "        ),",
-                    "        entryStart: \"Leah is your magically summoned assistant.\"",
+                    "        entryStart: \"LewdLeah is your magically summoned assistant.\"",
                     "    });",
                     "    if (success) {",
-                    "        text = formatMessage(\"You begin summoning Leah!\");",
-                    "        log(\"Attempting to summon Leah\");",
+                    "        text = formatMessage(\"You begin summoning LewdLeah!\");",
+                    "        log(\"Attempting to summon LewdLeah\");",
                     "    } else {",
-                    "        text = formatMessage(\"You failed to summon Leah...\");",
-                    "        log(\"Leah could not be summoned\");",
+                    "        text = formatMessage(\"You failed to summon LewdLeah...\");",
+                    "        log(\"LewdLeah could not be summoned\");",
                     "    }",
                     "}],",
-                    "[\"alter leah\", () => {",
+                    "[\"alter lewdleah\", () => {",
                     "    alterMind();",
-                    "    const success = AutoCards().API.redoCard(\"Leah\", true, (",
-                    "        \"You subjected Leah to mind-altering magic\\n\" +",
+                    "    const success = AutoCards().API.redoCard(\"LewdLeah\", true, (",
+                    "        \"You subjected LewdLeah to mind-altering magic\\n\" +",
                     "        \"Therefore she is now entirely \" +",
                     "        minds[state.mind] +",
                     "        \", utterly captivated by your will\"",
                     "    ));",
                     "    if (success) {",
                     "        text = formatMessage(",
-                    "            \"You proceed to alter Leah's mind!\"",
+                    "            \"You proceed to alter LewdLeah's mind!\"",
                     "        );",
-                    "        log(\"Attempting to alter Leah\");",
+                    "        log(\"Attempting to alter LewdLeah\");",
                     "    } else {",
-                    "        text = formatMessage(\"You failed to alter Leah...\");",
-                    "        log(\"Leah could not be altered\");",
+                    "        text = formatMessage(\"You failed to alter LewdLeah...\");",
+                    "        log(\"LewdLeah could not be altered\");",
                     "    }",
                     "}],",
                     "[\"show api\", () => {",
